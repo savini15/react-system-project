@@ -1,7 +1,5 @@
 import React,{useState} from 'react'
 import { Layout,Dropdown,Avatar} from 'antd';
-
-
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -47,8 +45,6 @@ export default function TopBar() {
              欢迎回来
         </div>
       </Dropdown>
-  
-
   </Header>
   )
 }

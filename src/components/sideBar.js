@@ -8,7 +8,6 @@ import {
     MehOutlined
   } from '@ant-design/icons';
   import './index.css'
-import { getOverflowOptions } from 'antd/es/_util/placements';
 export default function SideBar() {
  const {  Sider } = Layout;
  const navigate = useNavigate()
