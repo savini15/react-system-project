@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import { Button, Table, Tag ,Modal} from 'antd'
+import { Button, Table, Tag ,Modal,Popover,Switch} from 'antd'
 import axios from 'axios';
 import { DeleteOutlined, EditOutlined,ExclamationCircleFilled } from '@ant-design/icons';
+import Item from 'antd/es/list/Item';
 export default function RightList() {
     let [dataSource,setDataSource]  =useState([])
     const {confirm} = Modal
@@ -39,8 +40,15 @@ export default function RightList() {
                  <Button danger shape='circle' 
                  onClick={()=>deleteConfirm(item)}
                  icon={<DeleteOutlined/>}></Button>
-                <Button type='primary' shape='circle'
-                icon={<EditOutlined/>}></Button>
+
+                 <Popover content={
+                    <Switch checked={item.pagepermission} onChange={()=>{switchChange(item)}}></Switch>
+                   }
+                  title='页面配置' >
+                    <Button type='primary' shape='circle'
+                    icon={<EditOutlined/>}></Button>
+                 </Popover>
+               
                </div>
             )
           },
@@ -79,6 +87,17 @@ export default function RightList() {
         }
     )
     }
+
+
+const switchChange= (item)=>{
+    item.pagepermission = item.pagepermission ===1 ?0 :1
+    setDataSource([...dataSource])
+    const url = item.grade ===1 ? 'http://localhost:8090/rights/':'http://localhost:8090/children/'
+
+    axios.patch(`${url}/${item.id}`,{
+        pagepermission: item.pagepermission
+    })
+}
   return (
     <div>
 

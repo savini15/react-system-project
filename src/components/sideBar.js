@@ -18,7 +18,7 @@ useEffect(()=>{
     axios.get('http://localhost:8090/rights?_embed=children').then(
         res=>{
             console.log(res.data)
-            
+            //pagepermission 为0  时候不显示在menu里
             setItems(res.data)
         }
     )
@@ -49,7 +49,6 @@ useEffect(()=>{
 
           onClick={(item)=>{goPage(item)}}
           selectedKeys={defaultSelectedKeys}
-        //   selectedKeys={selectedKeys}
         />
       </Sider>
     )
