@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import React,{useState,useEffect} from 'react'
+import { useNavigate,useLocation } from 'react-router-dom';
 import { Layout, Menu} from 'antd';
 import {
     UploadOutlined,
@@ -8,31 +8,30 @@ import {
     MehOutlined
   } from '@ant-design/icons';
   import './index.css'
-export default function SideBar() {
+import axios from 'axios';
+export default function SideBar(props) {
  const {  Sider } = Layout;
  const navigate = useNavigate()
  //从后台根据当前的用户角色返回侧边栏
-// 
- const items = [
-    { label: '首页', key: '/newSandBox/home',icon:<MehOutlined /> }, // 菜单项务必填写 key
-    { label: '用户管理', key: '/newSandBox/user-manager',
-     children:[
-        {
-            label:'用户列表',
-            key: '/newSandBox/user-manager/list',
+let [items,setItems]  =useState([])
+useEffect(()=>{
+    axios.get('http://localhost:8090/rights?_embed=children').then(
+        res=>{
+            console.log(res.data)
+            
+            setItems(res.data)
         }
-     ]
-    },
-    {
-      label: '权限管理',
-      key: '/right-manage',
-      children: [
-        { label: '角色列表', key: '/newSandBox/right-manager/role/list' },
-        { label: '权限列表', key: '/newSandBox/right-manager/right/list' },
-    ],
-    },
-  ];
+    )
+},[])
  let [collapsed,setCollapse] = useState(false)
+ const location =useLocation()
+ console.log('lcation----',location)
+ const defaultSelectedKeys = [location.pathname]
+ const arr = location.pathname.split('/')
+ const defaultOpenKeys = [`${arr.splice(0,arr.length-2).join('/')}`]
+
+ const selectedKeys = [`/${location.pathname.split('/')[1]}`]
+ console.log('defaultOpenKeys',defaultOpenKeys)
  let goPage = (item  )=>{
    console.log('item----',item)
    navigate(item.key)
@@ -41,14 +40,16 @@ export default function SideBar() {
     
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" > 导航列表</div>
-       
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultOpenKeys={defaultOpenKeys}
+         
           items={items}
 
           onClick={(item)=>{goPage(item)}}
+          selectedKeys={defaultSelectedKeys}
+        //   selectedKeys={selectedKeys}
         />
       </Sider>
     )

@@ -1,24 +1,48 @@
 {
-  "posts": [
+  "rights": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "key": "/newSabdBox/home",
+      "label": "首页",
+      "pagepermission": 1,
+      "grade": 1
     },
     {
-      "title": "kkk",
-      "author": "jjjjj",
-      "id": 2
-    }
-  ],
-  "comments": [
+      "id": 2,
+      "key": "/newSandBox/user-manager",
+      "label": "用户管理",
+      "pagepermission": 1,
+      "grade": 1
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 3,
+      "key": "/newSandBox/right-manager",
+      "label": "权限管理",
+      "pagepermission": 1,
+      "grade": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "children": [
+    {
+      "label": "用户列表",
+      "key": "/newSandBox/user-manager/user/list",
+      "id": 4,
+      "rightId": 2,
+      "grade": 2
+    },
+    {
+      "label": "角色列表",
+      "id": 5,
+      "rightId": 3,
+      "key": "/newSandBox/right-manager/role/list",
+      "grade": 2
+    },
+    {
+      "label": "权限列表",
+      "id": 6,
+      "rightId": 3,
+      "key": "/newSandBox/right-manager/right/list",
+       "grade": 2
+    }
+  ]
 }

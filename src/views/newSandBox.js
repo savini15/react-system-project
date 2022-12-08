@@ -4,8 +4,9 @@ import SideBar from '../components/sideBar'
 import TopBar from '../components/topBar'
 import { Layout} from 'antd';
 import './newSandBox.css'
-export default function NewSandBox() {
+export default function NewSandBox(props) {
     const {Content} = Layout
+   
   return (
     <Layout>
         <SideBar  />

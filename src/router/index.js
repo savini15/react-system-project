@@ -15,7 +15,7 @@ export default function Routes() {
          {path:'/newSandBox',element:<NewSandBox/>,
          children:[
             {path:'home',element:<Home/>},
-            {path:'user-manager/list',element:<UserList/>},
+            {path:'user-manager/user/list',element:<UserList/>},
             {path:'right-manager/role/list',element:<RoleList/>},
             {path:'right-manager/right/list',element:<RightList/>},
          ]
